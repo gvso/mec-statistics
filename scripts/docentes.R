@@ -2,7 +2,7 @@ library(stringr)
 
 DIRECTORY <- "/home/gvso/Data/MEC/data/docentes/"
 CUR_YEAR <- 2018
-STARTING_YEAR <- 1985
+STARTING_YEAR <- 1995
 RETIRING_YEAR <- 25
 
 file <- paste0(DIRECTORY, "funcionarios_docentes_2018_9.csv")
@@ -32,7 +32,7 @@ data2018$antiguedad_docente <- NULL
 ######## Estimates number of teachers per year ##########
 #########################################################
 plot_number_of_teachers <- function() {
-  seniority_years <- (CUR_YEAR - 1985) : min(data2018$seniority_year)
+  seniority_years <- (CUR_YEAR - 1965) : min(data2018$seniority_year)
   
   number_teachers <- c()
   total <- 0
@@ -45,8 +45,14 @@ plot_number_of_teachers <- function() {
     number_teachers <- c(number_teachers, total)
   }
   
-  plot(CUR_YEAR - seniority_years, number_teachers, xaxt="n", xlab='Año', ylab='Cantidad de docentes (aproximado)', 
-       type='l', col='purple', lty=3, lwd=2)
+  print(total)
+  
+  #plot(CUR_YEAR - seniority_years, number_teachers, xaxt="n", xlab='Año', ylab='Cantidad de docentes (aproximado)', 
+  #     type='l', col='purple', lty=3, lwd=2)
+  #axis(1, at = seq(STARTING_YEAR, CUR_YEAR, by = 2), las=2)
+
+  plot(CUR_YEAR - seniority_years[30:length(seniority_years)], number_teachers[30:length(seniority_years)], xaxt="n", xlab='Año', ylab='Cantidad de docentes (aproximado)', 
+     type='l', col='purple', lty=3, lwd=2)
   axis(1, at = seq(STARTING_YEAR, CUR_YEAR, by = 2), las=2)
 }
 
